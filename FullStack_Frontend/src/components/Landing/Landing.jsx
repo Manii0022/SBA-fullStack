@@ -18,11 +18,11 @@ function Landing() {
                             </div>
 
                         </div>
-                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             About
                         </div>
-                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             Connect
 
@@ -30,11 +30,11 @@ function Landing() {
                     </div>
 
                     <div className="flex justify-end gap-10 w-1/2 mr-5 mt-5 items-center">
-                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             Login
                         </div>
-                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             Get Started
                         </div>
