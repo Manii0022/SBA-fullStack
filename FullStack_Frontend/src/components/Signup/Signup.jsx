@@ -5,9 +5,9 @@ function Signup() {
     return (
         <div className="font-serif">
 
-            <div className="flex justify-around">
+            <div className="flex justify-center ">
 
-                <div className="flex-col justify-items-center items-center">
+                <div className="flex-col justify-items-center items-center pr-4">
                     <p className="text-4xl text-black">Signup</p>
                     <form className=" pt-3" action="">
 
@@ -17,7 +17,6 @@ function Signup() {
                                     <p>
                                         name
                                     </p>
-
                                     <input className="border-2  border-gray-400 rounded-[5px] " type="text" name="name" placeholder="What should we call you !" />
                                 </div>
                                 <div className="flex flex-col ">
@@ -43,7 +42,7 @@ function Signup() {
                             </div>
 
                             <div>
-                                <span>Already have an account ? {/*<Link to="/login">login</Link>  this will work once routers are created*/} </span>
+                                <span>Already have an account ? login {/*<Link to="/login">login</Link>  this will work once routers are created*/} </span>
                             </div>
 
                         </div>
@@ -51,9 +50,26 @@ function Signup() {
                     </form>
                 </div>
 
-                <div className="flex justify-center items-center">
-                    <span className="py-6 px-4">
-                        Continue with Google
+                <div className=" w-10 flex flex-col items-center pl-5 pr-5">
+                    <div className=" bg-black h-[45%] w-[2px] ">
+                    </div>
+                    <div className="  h-[10%] w-5">
+                        <span>or</span>
+
+                    </div>
+                    <div className=" bg-black h-[45%] w-[2px]">
+
+                    </div>
+                </div>
+
+                <div className="flex justify-center items-center pl-4">
+                    <span className="border-2 border-black rounded-lg px-3 py-1 flex 
+                    hover:shadow-2xl hover:bg-emerald-300  transition-all duration-300 ">
+                        <img className=" h-10 " src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="" />
+                        <button className=" ">
+                            Signup with Google
+                        </button>
+                        
                     </span>
 
                 </div>
