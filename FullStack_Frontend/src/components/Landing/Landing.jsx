@@ -1,7 +1,7 @@
 function Landing() {
 
     return (
-        <>
+        <div className="font-serif">
 
             <header className="">
                 <nav className="flex justify-between bg-amber-50 " >
@@ -13,41 +13,60 @@ function Landing() {
                                 <img className="size-[100px]" src="https://www.svgrepo.com/show/494022/travel.svg" alt="logo" />
                             </div>
 
-                            <div className="text-xl border-2 border-transparent rounded-lg hover:bg-gray-400
-                            hover:text-white hover:border-black">
+                            <div className="text-xl ">
                                 Journal App
                             </div>
 
                         </div>
-                        <div className="    text-5xl
-                     font-serif">
+                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                            hover:text-black">
                             About
                         </div>
-                        <div className="    text-5xl
-                     font-serif">
+                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                            hover:text-black">
                             Connect
 
                         </div>
                     </div>
 
                     <div className="flex justify-end gap-10 w-1/2 mr-5 mt-5 items-center">
-                        <div className="    text-5xl
-                     font-serif">
+                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                            hover:text-black">
                             Login
                         </div>
-                        <div className="    text-5xl
-                     font-serif">
+                        <div className="text-5xl font-serif border-transparent rounded-lg hover:bg-emerald-300
+                            hover:text-black">
                             Get Started
                         </div>
-
-
                     </div>
 
                 </nav>
-
             </header>
+            
+            <div className="">
+                <main className="ml-[70px] mr-[70px] pt-[20px] bg-amber-100">
+                <section>
+                    <div className="text-5xl flex justify-center">
+                        Welcome to the Journal App 
+                    </div>
+                    <div className="flex pt-10">
+                        <img className="bg-cover pt-5" src="https://images.unsplash.com/photo-1471970394675-613138e45da3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8am91cm5hbHxlbnwwfDJ8MHx8fDA%3D" alt="img" />
+                        <div className=" pl-7 pt-5 text-2xl flex justify-center align-middle text-justify">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita ex repellat ipsa eius minus 
+                        fuga quae, doloribus est nostrum necessitatibus? Odit ut saepe quo laborum unde explicabo doloribus totam omnis!
+                        Temporibus vitae odio labore aut velit praesentium, rem magnam expedita incidunt eveniet itaque tempora saepe, vel ipsam eius possimus. Amet laborum aperiam deserunt repellendus nostrum cumque inventore nemo eum nobis!
+                        In voluptatem aliquam nulla veritatis cumque quia nostrum, vel voluptatibus quaerat inventore similique facilis neque qui exercitationem mollitia explicabo, minus suscipit placeat magni. Blanditiis, corrupti? Blanditiis sit ab numquam voluptas.
+                        Nobis earum porro vitae in quos dolore at. Unde reiciendis quam provident aliquid. At eius iure incidunt voluptatibus optio nulla debitis. Ut iste, inventore architecto ipsum quos aut? Veniam, temporibus.
+                        Voluptatum aliquam praesentium, rerum qui voluptates optio magnam recusandae est distinctio sapiente, adipisci ipsum illum animi impedit assumenda vero! Eius dicta quod sed quasi minima esse magnam eaque eos delectus!
+                    </div>
+                    </div>
+                    
+                </section>
+            </main>
+            </div>
+            
 
-        </>
+        </div>
 
     );
 }
