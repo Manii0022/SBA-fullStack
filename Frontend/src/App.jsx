@@ -5,14 +5,13 @@ import Landing from './components/Landing/Landing'
 import Footer from './components/Footer/Footer'
 import './App.css'
 import Signup from './components/Signup/Signup'
+import Dashboard from './components/Dashboard/Dashboard'
 
 function App() {
 
   return (
     <>
-
-    <Landing />
-    <Footer/>
+    <Dashboard />
     </>
   )
 }
