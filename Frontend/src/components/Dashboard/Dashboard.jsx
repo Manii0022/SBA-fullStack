@@ -44,7 +44,7 @@ function Dashboard() {
                             Navigations
                         </span>
                     </div>
-                    <div>
+                    <div >
                         <ul className="text-xl p-4 space-y-2 w-80" >
                             <li className="">
                                 <button className="bg-amber-200 rounded-lg p-2 "

@@ -6,12 +6,13 @@ import Footer from './components/Footer/Footer'
 import './App.css'
 import Signup from './components/Signup/Signup'
 import Dashboard from './components/Dashboard/Dashboard'
+import Practice from './components/Pracice/Practice'
 
 function App() {
 
   return (
     <>
-    <Dashboard />
+    <Practice />
     </>
   )
 }
