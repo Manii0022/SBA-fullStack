@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState,} from "react";
+import React, { useEffect, useRef, useState, } from "react";
 import { Link, useLocation } from "react-router-dom"
 function Signup() {
 
@@ -107,7 +107,7 @@ function Signup() {
 
                 {/* signup  */}
                 <div className="flex justify-center items-center pl-4">
-                    <span className="border-2 border-black rounded-lg px-3 py-1 flex hover:shadow-2xl hover:bg-emerald-300 transition-all duration-300">
+                    <div className="border-2 border-black rounded-lg px-3 py-1 flex hover:shadow-2xl hover:bg-emerald-300 transition-all duration-300">
                         <img
                             className="h-10"
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
@@ -116,16 +116,21 @@ function Signup() {
                         <button onClick={() => (window.location.href = "http://localhost:8080/oauth2/authorization/google")}>
                             Signup with Google
                         </button>
-                    </span>
+                    </div>
 
-                    {user && (
-                        <div className="mt-4 p-4 border rounded">
-                            <p>Name: {user.name}</p>
-                            <p>Email: {user.email}</p>
-                            <p className=" w-full overflow-auto ">Token : {token}</p>
-                            <p>{user.newUser ? "Signed up successfully!" : "You are already signed up, please login."}</p>
-                        </div>
-                    )}
+                    <div>
+                        {user && (
+                            <div className="mt-4 p-4 border rounded">
+                                <p>Name: {user.name}</p>
+                                <p>Email: {user.email}</p>
+                                <p className=" w-full overflow-auto ">Token : {token}</p>
+                                <p>{user.newUser ? "Signed up successfully!" : "You are already signed up, please login."}</p>
+                            </div>
+                        )}
+
+                    </div>
+                    
+
 
                 </div>
 
