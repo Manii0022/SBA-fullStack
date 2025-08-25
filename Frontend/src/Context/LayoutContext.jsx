@@ -14,7 +14,7 @@ const LayoutProvider = ({ children }) => {
     )
 }
 
-// export default LayoutProvider   // instead of this we will return custom 
+export default LayoutProvider;   // instead of this we'll return custom 
 
 // now instead of const[value] = useContext(LayoutContext) we will use below function
 // .ie. const [value] = useLayout();

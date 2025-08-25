@@ -1,6 +1,14 @@
 import { NavLink } from "react-router-dom";
+import { useLayout } from "../../Context/LayoutContext";
+import { useEffect } from "react";
 
 function Landing() {
+
+    const {setShowHeader, setShowFooter} = useLayout();
+    useEffect(()=>{
+        setShowFooter(true);
+        setShowHeader(false);
+    },[])
 
     return (
         <div className="font-serif">
@@ -22,12 +30,32 @@ function Landing() {
                         </div>
                         <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
-                            About
+                            <NavLink
+                                to={"home"}
+                                className={({ isActive }) =>
+                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                        ${isActive ? "text-orange-700" : "text-gray-700"}
+                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
+                                        lg:p-0`
+                                }
+                            >
+                                Home
+                            </NavLink>
                         </div>
+
                         <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
-                            Connect
-
+                            <NavLink
+                                to={"connect"}
+                                className={({ isActive }) =>
+                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                        ${isActive ? "text-orange-700" : "text-gray-700"}
+                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
+                                        lg:p-0`
+                                }
+                            >
+                                Connect
+                            </NavLink>
                         </div>
                     </div>
 
@@ -46,10 +74,11 @@ function Landing() {
                                 Signup
                             </NavLink>
                         </div>
+
                         <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             <NavLink
-                                to={"home"}
+                                to={"login"}
                                 className={({ isActive }) =>
                                     `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
@@ -57,9 +86,29 @@ function Landing() {
                                         lg:p-0`
                                 }
                             >
-                                Home
+                                Login
                             </NavLink>
                         </div>
+
+                        
+
+                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                            hover:text-black">
+                            <NavLink
+                                to={"contact"}
+                                className={({ isActive }) =>
+                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                        ${isActive ? "text-orange-700" : "text-gray-700"}
+                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
+                                        lg:p-0`
+                                }
+                            >
+                                Contact Us
+                            </NavLink>
+                        </div>
+
+                        
+
                     </div>
 
                 </nav>

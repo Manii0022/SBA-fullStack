@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
+import { useLayout } from "../../Context/LayoutContext";
 
 function Dashboard() {
+
+    const {setShowHeader} = useLayout();
+    useEffect(()=>{
+        setShowHeader(false);
+    },[])
 
     const [data, setData] = useState(null);
 

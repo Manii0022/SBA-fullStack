@@ -5,13 +5,13 @@ import { useLayout } from "./Context/LayoutContext";
 
 function Layout () {
 
-    const [showHeader, showFooter] = useLayout();
+    const {showHeader, showFooter} = useLayout();
 
     return(
         <>
         {showHeader &&  <Header/>}   {/* now whenever you need to show header, make showHeader=true in useEffect in that component */}
         <Outlet/>
-        {showHeader &&  <Footer/>}
+        {showFooter &&  <Footer/>}
         </>
     )
 }
