@@ -18,7 +18,7 @@ function Footer() {
     return (
         <>
 
-            <footer className="bg-purple-400 flex-col">
+            <footer className="mt-10 flex-col">
                 {/* <div>
                     FAQs here
                     <ul className="space-y-2">
@@ -29,8 +29,12 @@ function Footer() {
                     </ul>
 
                 </div> */}
-                <h2 className="text-2xl font-bold mb-4">FAQs</h2>
-                <ul className="space-y-2">
+                <div className="border-1 border-black ml-10 mr-10">
+                </div>
+                <h2 className="text-8xl font-bold mb-4 text-center">FAQs</h2>
+                <div className="border-1 border-black ml-10 mr-10"></div>
+
+                <ul className=" mt-10 space-y-2">
                     {faqs.map((item, index) => (
                         <li key={index} className="border rounded-lg">
                             <button

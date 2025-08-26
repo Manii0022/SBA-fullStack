@@ -14,11 +14,11 @@ function Landing() {
         <div className="font-serif">
 
             <header className="">
-                <nav className="flex justify-between bg-amber-50 " >
+                <nav className="flex justify-between " >
 
-                    <div className="flex gap-10 w-1/2 mt-5 ml-5 items-center">
-                        <div className=" h-full text-5xl 
-                     font-serif">
+                    {/* Left section */}
+                    <div className="flex gap-10 px-6 py-4 items-center">
+                        <div className="text-5xl ">
                             <div>
                                 <img className="size-[100px]" src="https://www.svgrepo.com/show/494022/travel.svg" alt="logo" />
                             </div>
@@ -28,62 +28,74 @@ function Landing() {
                             </div>
 
                         </div>
-                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl border-transparent  rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             <NavLink
                                 to={"home"}
                                 className={({ isActive }) =>
-                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                `block py-2 pr-4 pl-3 duration-200  
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
-                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
+                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
                                 }
                             >
                                 Home
                             </NavLink>
                         </div>
 
-                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl border-transparent rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             <NavLink
                                 to={"connect"}
                                 className={({ isActive }) =>
-                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                `block py-2 pr-4 pl-3 duration-200  
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
-                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
+                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
                                 }
                             >
                                 Connect
                             </NavLink>
                         </div>
+
+                        <div className="text-5xl border-transparent rounded-lg hover:bg-emerald-300
+                            hover:text-black">
+                            <NavLink
+                                to={"contact"}
+                               className={({ isActive }) =>
+                                `block py-2 pr-4 pl-3 duration-200  
+                                        ${isActive ? "text-orange-700" : "text-gray-700"}
+                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
+                                }
+                            >
+                                Contact Us
+                            </NavLink>
+                        </div>
                     </div>
 
-                    <div className="flex justify-end gap-10 w-1/2 mr-5 mt-5 items-center">
-                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                    {/* right section */}
+
+                    <div className="flex justify-between gap-7 items-center px-6 py-2 mr-5">
+                        <div className="text-5xl border-transparent  rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             <NavLink
                                 to={"signup"}
-                                className={({ isActive }) =>
-                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                               className={({ isActive }) =>
+                                `block py-2 pr-4 pl-3 duration-200  
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
-                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
+                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
                                 }
                             >
                                 Signup
                             </NavLink>
                         </div>
 
-                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                        <div className="text-5xl border-transparent  rounded-lg hover:bg-emerald-300
                             hover:text-black">
                             <NavLink
                                 to={"login"}
                                 className={({ isActive }) =>
-                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                `block py-2 pr-4 pl-3 duration-200  
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
-                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
+                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
                                 }
                             >
                                 Login
@@ -91,31 +103,13 @@ function Landing() {
                         </div>
 
                         
-
-                        <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
-                            hover:text-black">
-                            <NavLink
-                                to={"contact"}
-                                className={({ isActive }) =>
-                                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
-                                        ${isActive ? "text-orange-700" : "text-gray-700"}
-                                        hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
-                                }
-                            >
-                                Contact Us
-                            </NavLink>
-                        </div>
-
-                        
-
                     </div>
 
                 </nav>
             </header>
 
             <div className="">
-                <main className="ml-[70px] mr-[70px] pt-[20px] bg-amber-100">
+                <main className="ml-[70px] mr-[70px] pt-[20px] ">
                     <section>
                         <div className="text-5xl flex justify-center">
                             Welcome to the Journal App

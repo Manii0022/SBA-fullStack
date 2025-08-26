@@ -1,9 +1,21 @@
+import React, { useEffect } from "react"
+import { useLayout } from "../../Context/LayoutContext";
+
+
 function Login() {
+
+    const {setShowHeader, setShowFooter} = useLayout();
+    useEffect(()=>{
+        setShowFooter(true);
+        setShowHeader(false);
+    },[])
 
     return (
 
-        <div className="flex justify-center py-10">
-            <div className="flex-col justify-items-center items-center pr-4">
+        <div className="flex justify-center py-10 h-screen w-full">
+
+            {/* left */}
+            <div className="flex-col justify-items-center content-center  pr-4">
                 <p className="text-4xl text-black">Login</p>
                 <form className=" pt-3" action="">
 
@@ -36,6 +48,7 @@ function Login() {
                 </form>
             </div>
 
+            {/* middle */}
             <div className=" w-10 flex flex-col justify-center items-center pl-5 pr-5">
                 <div className=" bg-black h-[35%] w-[2px]">
                 </div>
@@ -48,6 +61,7 @@ function Login() {
                 </div>
             </div>
 
+            {/* right */}
             <div className="flex justify-center items-center pl-4">
                 <span className="border-2 border-black rounded-lg px-3 py-1 flex 
                     hover:shadow-2xl hover:bg-emerald-300  transition-all duration-300 ">

@@ -3,10 +3,10 @@ import { useLayout } from "../../Context/LayoutContext";
 
 function Dashboard() {
 
-    const {setShowHeader} = useLayout();
-    useEffect(()=>{
+    const { setShowHeader } = useLayout();
+    useEffect(() => {
         setShowHeader(false);
-    },[])
+    }, [])
 
     const [data, setData] = useState(null);
 
@@ -19,10 +19,12 @@ function Dashboard() {
             }
         })
             .then(res => res.json())
-            .then(res => {setData(res)
-        console.log(JSON.stringify(res.data))})
+            .then(res => {
+                setData(res)
+                console.log(JSON.stringify(res.data))
+            })
             .catch(error => console.log(`Cannot fetch data ${error}`));
-        
+
 
     }
 
@@ -52,14 +54,27 @@ function Dashboard() {
                     </div>
                     <div >
                         <ul className="text-xl p-4 space-y-2 w-80" >
-                            <li className="">
-                                <button className="bg-amber-200 rounded-lg p-2 "
-                                    onClick={handleClick}>Get Journal Entries</button>
+                            <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300">
+                                <button onClick={handleClick} className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100">
+                                    Get Journal Entries</button>
 
                             </li>
-                            <li className="bg-amber-200 rounded-lg p-2  ">Post new Entry</li>
-                            <li className="bg-amber-200 rounded-lg p-2  ">Update existing</li>
-                            <li className="bg-amber-200 rounded-lg p-2  ">Delete Entry</li>
+                            <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
+                                <button className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100">
+                                    Create new Entry</button>
+                            </li>
+                            <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
+                                <button className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100">
+                                    Update Existing</button>
+                            </li>
+                            <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
+                                <button className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100">
+                                    Delete Entry</button>
+                            </li>
                         </ul>
                     </div>
                 </div>
