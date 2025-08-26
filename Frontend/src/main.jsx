@@ -18,11 +18,13 @@ import Footer from './components/Footer/Footer.jsx'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Layout />}>
-    <Route index={true} element={<Landing/>}/>
+    <Route index={true} element={<Landing />} />
     <Route path='login' element={<Login />} />
-    <Route path='home' element={<Home/>}/>
-    <Route path='signup' element={<Signup />} />
-    <Route path='dashboard' element={<Header/> && <Dashboard />} />
+    <Route path='home' element={<Home />} />
+    <Route path='/signup' element={<Signup />} >
+      <Route path='login' element={<Login />} />
+    </Route>
+    <Route path='dashboard' element={<Dashboard />}/>
     <Route path='contact' element={<Contact />} />
     <Route path='connect' element={<></>} />
   </Route>
@@ -31,8 +33,8 @@ const router = createBrowserRouter(createRoutesFromElements(
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LayoutProvider>
-    <RouterProvider router={router} /> 
+      <RouterProvider router={router} />
     </LayoutProvider>
-    
+
   </StrictMode>,
 )

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLayout } from "../../Context/LayoutContext";
+import { useLocation } from "react-router-dom";
 
 function Dashboard() {
 
@@ -24,9 +25,27 @@ function Dashboard() {
                 console.log(JSON.stringify(res.data))
             })
             .catch(error => console.log(`Cannot fetch data ${error}`));
-
-
     }
+
+     const [user, setUser] = useState(null);
+        const [token, setToken] = useState(null);
+        const location = useLocation();
+    
+        useEffect(() => {
+            const query = new URLSearchParams(location.search);
+            const token = query.get("token");
+            setToken(token);
+            const email = query.get("email");
+            const name = query.get("name");
+            const exists = query.get("exists");
+    
+            if (token) {
+                localStorage.setItem("token", token);
+                setUser({ email, name, newUser: true });
+            } else if (exists) {
+                setUser({ email, name, newUser: false });
+            }
+        }, [location.search]);
 
 
     return (
