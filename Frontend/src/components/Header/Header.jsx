@@ -39,7 +39,7 @@ function Header() {
                     <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
                             hover:text-black">
                         <NavLink
-                            to={"home"}
+                            to={""}
                            className={({ isActive }) =>
                                 `block py-2 pr-4 pl-3 duration-200  
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
