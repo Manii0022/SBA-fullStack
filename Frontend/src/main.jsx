@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import Landing from './components/Landing/Landing.jsx'
+import Landing from './components/Home/Home.jsx'
 import Login from './components/Login/Login.jsx'
 import Practice from './components/Pracice/Practice.jsx'
 import Layout from './Layout.jsx'
@@ -18,12 +18,10 @@ import Footer from './components/Footer/Footer.jsx'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Layout />}>
-    <Route index={true} element={<Landing />} />
+    <Route index={true} element={<Home />} />
     <Route path='login' element={<Login />} />
     <Route path='home' element={<Home />} />
-    <Route path='/signup' element={<Signup />} >
-      <Route path='login' element={<Login />} />
-    </Route>
+    <Route path='signup' element={<Signup />} />
     <Route path='dashboard' element={<Dashboard />}/>
     <Route path='contact' element={<Contact />} />
     <Route path='connect' element={<></>} />
