@@ -3,9 +3,8 @@ import { useLayout } from "../../Context/LayoutContext";
 
 function Contact() {
 
-    const {setShowHeader, setShowFooter} = useLayout();
+    const {setShowHeader} = useLayout();
     useEffect(()=>{
-        setShowFooter(true);
         setShowHeader(true);
     },[]);
 
