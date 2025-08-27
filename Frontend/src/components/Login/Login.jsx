@@ -7,9 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
 
-    const { setShowHeader, setShowFooter } = useLayout();
+    const { setShowHeader } = useLayout();
     useEffect(() => {
-        setShowFooter(true);
         setShowHeader(false);
     }, []);
 
