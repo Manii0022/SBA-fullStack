@@ -1,13 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLayout } from "../../Context/LayoutContext";
 import { useEffect } from "react";
 
 function Home() {
 
+    const navigate = useNavigate();
+
     const { setShowHeader } = useLayout();
     useEffect(() => {
         setShowHeader(false);
     }, [])
+
+    const handleConnect = (e) => {
+        e.preventDefault(); // stop NavLink's default navigation
+        navigate("/footer"); // navigate manually
+    };
 
     return (
         <div className="font-serif">
