@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom"
+import { Link, Navigate, NavLink, useLocation, useNavigate } from "react-router-dom"
 import { useLayout } from "../../Context/LayoutContext";
 function Signup() {
+
+    const navigate = useNavigate();
 
     const { setShowHeader } = useLayout();
     useEffect(() => {
@@ -24,7 +26,6 @@ function Signup() {
         // const body = JSON.stringify(formDataObj);  // this converts JS object to JSON string..now this can be sent to backend using fetch or axios
         // console.log(formDataObj);   // now we can access particular value using formDataObj.email or formDataObj.password
         // console.log(body);
-        
         try {
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json")
@@ -35,9 +36,13 @@ function Signup() {
             })
 
             if (response.ok) {
-                window.alert("Signup success ✅ . Please login to continue.");
-                // optional: reset form
-                formRef.current.reset();
+                const data = response.json();
+                const token = data.token;
+                localStorage.setItem("token", token);    // save token to local storage
+                formRef.current.reset();   // reset form 
+                navigate("/dashboard");   // after everything, redirect to dashboard
+
+                
             } else {
                 const errorMsg = await response.text();
                 window.alert("Error ❌: " + errorMsg || response.status);
@@ -47,7 +52,7 @@ function Signup() {
             console.error(error);
         }
 
-        // The JSON.stringify() method converts a JavaScript object or value to a JSON string.
+        // The JSON.stringify() method converts a JavaScript object to a JSON string.
         // The JSON.parse() function is designed to do the opposite of JSON.stringify(). 
         // It takes a JSON string as input and converts it into a JavaScript object.
     };
