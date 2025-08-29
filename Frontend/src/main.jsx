@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'  
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -14,6 +14,11 @@ import Header from './components/Header/Header.jsx'
 import Contact from './components/Contact/Contact.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import Connect from './components/Connect/Connect.jsx'
+import GetAll from './components/Dashboard/GetAll.jsx'
+import Default from './components/Dashboard/Default.jsx'
+import Create from './components/Dashboard/Create.jsx'
+import Update from './components/Dashboard/Update.jsx'
+import Delete from './components/Dashboard/Delete.jsx'
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -22,9 +27,16 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='login' element={<Login />} />
     <Route path='home' element={<Home />} />
     <Route path='signup' element={<Signup />} />
-    <Route path='dashboard' element={<Dashboard />}/>
+    <Route path='dashboard' element={<Dashboard />}>
+      <Route index={true} element={<Default/>} />
+      <Route path='getall' element={<GetAll/>} />
+      <Route path='create' element={<Create/>} />
+      <Route path='update' element={<Update/>} />
+      <Route path='delete' element={<Delete/>} />
+    </Route>
+
     <Route path='contact' element={<Contact />} />
-    <Route path='connect' element={<Connect/>} />
+    <Route path='connect' element={<Connect />} />
   </Route>
 ))
 
@@ -33,6 +45,5 @@ createRoot(document.getElementById('root')).render(
     <LayoutProvider>
       <RouterProvider router={router} />
     </LayoutProvider>
-
   </StrictMode>,
 )
