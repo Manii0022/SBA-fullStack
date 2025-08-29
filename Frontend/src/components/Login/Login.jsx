@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function Login() {
 
     const formRef = React.useRef(null);
-    const [user , setUser] = React.useState(null);
+    const [user, setUser] = React.useState(null);
 
     const { setShowHeader } = useLayout();
     useEffect(() => {
@@ -30,17 +30,17 @@ function Login() {
                 password: password
             }
         )
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json")
+        
         try {
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json")
-
             const response = await fetch("http://localhost:8080/public/login", {
                 method: "POST",
-                body:body,
+                body: body,
                 headers: myHeaders
-            })            
+            })
             if (response.ok) {
-                const data = await response.text();             
+                const data = await response.text();
                 const token = data;
                 console.log(data);
                 localStorage.setItem("token", token);
