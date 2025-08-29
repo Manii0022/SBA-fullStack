@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLayout } from "../../Context/LayoutContext";
-import { useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import GetAll from "./GetAll";
 
 function Dashboard() {
@@ -41,23 +41,23 @@ function Dashboard() {
     //         .catch(err => console.error("Error fetching journal entries:", err));
     // }
 
-    function createNewEntry(){
-        <div>
-            <form>
-                <div>
-                    <p>Title :</p>
-                    <input type="text" placeholder="Enter Title" />
-                </div>
-                <div>
-                    <p>Content :</p>
-                    <input type="text" placeholder="Enter Content" />
-                </div>
-                <div>
-                    <button>Continue</button>
-                </div>
-            </form>
-        </div>
-    }
+    // function createNewEntry() {
+    //     <div>
+    //         <form>
+    //             <div>
+    //                 <p>Title :</p>
+    //                 <input type="text" placeholder="Enter Title" />
+    //             </div>
+    //             <div>
+    //                 <p>Content :</p>
+    //                 <input type="text" placeholder="Enter Content" />
+    //             </div>
+    //             <div>
+    //                 <button>Continue</button>
+    //             </div>
+    //         </form>
+    //     </div>
+    // }
 
     // const [user, setUser] = useState(null);
     // const [token, setToken] = useState(null);
@@ -79,75 +79,75 @@ function Dashboard() {
     //     }
     // }, [location.search]);
 
-    function GetAllJournal(){
-        {<GetAll/>}
-    }
+    // function GetAllJournal() {
+    //     { <GetAll /> }
+    // }
 
     return (
         <div className="font-serif ml-10 mr-10 mt-10 ">
-            <div className="bg-cyan-200 flex justify-between ">
-                <div className="ml-5">
-                    <img className="size-[150px]" src="https://images.unsplash.com/vector-1738925655186-02fbc43662cf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGpvdXJuYWx8ZW58MHx8MHx8fDA%3D" alt="logo" />
-                    <span className="text-3xl ">Basic Journal Dashboard</span>
-                </div>
-                <div className="flex-col justify-center items-center content-center mr-5">
-                    <span className="text-8xl ">
-                        Your Daily Journal
-                    </span>
-                    <span>
-                        {
-                            <div className="text-3xl ml-10 mt-5">
-                                Welcome to your journal dashboard!
-                            </div>
-                        }
-                    </span>
-                </div>
+            <div>
+                <header>
+                    <div className="bg-cyan-200 flex justify-between ">
+                        <div className="ml-5">
+                            <img className="size-[150px]" src="https://images.unsplash.com/vector-1738925655186-02fbc43662cf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGpvdXJuYWx8ZW58MHx8MHx8fDA%3D" alt="logo" />
+                            <span className="text-3xl ">Basic Journal Dashboard</span>
+                        </div>
+                        <div className="flex-col justify-center items-center content-center mr-5">
+                            <span className="text-8xl ">
+                                Your Daily Journal
+                            </span>
+                            <span>
+                                {
+                                    <div className="text-3xl ml-10 mt-5">
+                                        Welcome to your journal dashboard!
+                                    </div>
+                                }
+                            </span>
+                        </div>
 
-            </div>
-
-            <div className="flex bg-amber-300 ">
-
-                <div className="w-[25%]" >
-                    <div className="mt-6 bg-gray-300 w-80 rounded-lg p-2 ml-2">
-                        <span className="text-2xl font-bold  p-2 rounded-lg">
-                            Navigations
-                        </span>
                     </div>
-                    <div >
-                        <ul className="text-xl p-4 space-y-2 w-80" >
+
+                    <div className=" bg-amber-300 flex " >
+                        <div className="m-2 bg-gray-300 text-center content-center rounded-lg p-2 text-2xl font-bold">
+                            Navigations
+                        </div>
+
+
+                        <ul className="w-full text-xl p-4 flex justify-evenly  " >
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300">
-                                <button onClick={GetAllJournal} className="border-transparent  rounded-lg  hover:text-black
-                                block pl-3 active:scale-95 transition transform duration-100">
-                                    Get Journal Entries</button>
+                                <NavLink to="getall" className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100" >
+                                    Get Journal Entries
+                                </NavLink>
+
 
                             </li>
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
-                                <button onClick={createNewEntry} className="border-transparent  rounded-lg  hover:text-black
-                                block pl-3 active:scale-95 transition transform duration-100">
-                                    Create new Entry</button>
+                                <NavLink to="create" className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100" >
+                                    Create New Entry
+                                </NavLink>
                             </li>
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
-                                <button className="border-transparent  rounded-lg  hover:text-black
-                                block pl-3 active:scale-95 transition transform duration-100">
-                                    Update Existing</button>
+                                <NavLink to="update" className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100" >
+                                    Update existing
+                                </NavLink>
                             </li>
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
-                                <button className="border-transparent  rounded-lg  hover:text-black
-                                block pl-3 active:scale-95 transition transform duration-100">
-                                    Delete Entry</button>
+                                <NavLink to="delete" className="border-transparent  rounded-lg  hover:text-black
+                                block pl-3 active:scale-95 transition transform duration-100" >
+                                    Delete Entry
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
-                </div>
-
-                <div className="bg-amber-100 w-[75%] flex justify-center items-center text-xl">
-                    <div className="max-w-full h-[564px] overflow-auto break-words p-4">
-                        {GetAllJournal()}
-                    </div>
-                </div>
-
+                </header>
             </div>
 
+            <div className="mt-10 mb-10 bg-emerald-200 h-fit w-f">
+                <Outlet />
+            </div>
         </div>
     );
 
