@@ -19,8 +19,8 @@ function Header() {
     };
 
     return (
-        <header className="">
-            <nav className="flex items-center justify-between bg-amber-50 px-6 py-4" >
+        <header className="bg-gray-400">
+            <nav className="flex items-center justify-between px-6 py-4" >
 
                 {/* Left section */}
                 <div className="flex gap-10 items-center">
@@ -36,7 +36,7 @@ function Header() {
 
                     </div>
 
-                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg 
                             hover:text-black">
                         <NavLink
                             to={""}
@@ -50,11 +50,10 @@ function Header() {
                         </NavLink>
                     </div>
 
-                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg 
                             hover:text-black">
                         <NavLink
                             to={"connect"}
-                            onClick={handleScrollToFooter}
                             className={({ isActive }) =>
                                 `block py-2 pr-4 pl-3 duration-200  
                                         ${isActive ? "text-orange-700" : "text-gray-700"}
@@ -65,7 +64,7 @@ function Header() {
                         </NavLink>
                     </div>
 
-                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg hover:bg-emerald-300
+                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg 
                             hover:text-black">
                         <NavLink
                             to={"contact"}
