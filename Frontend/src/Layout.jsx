@@ -9,9 +9,11 @@ function Layout () {
 
     return(
         <>
+        <div className="bg-[url('https://i.pinimg.com/736x/7e/0d/72/7e0d726de23526d9b02c2663c02f6227.jpg')] bg-no-repeat bg-cover w-full h-screen ">
         {showHeader &&  <Header/>}   {/* now whenever you need to show header, make showHeader=true in useEffect in that component */}
         <Outlet/>
         {showFooter &&  <Footer/>}
+        </div>
         </>
     )
 }
