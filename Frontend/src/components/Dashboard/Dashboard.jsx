@@ -115,7 +115,7 @@ function Dashboard() {
 
                         <ul className="w-full text-xl p-4 flex justify-evenly  " >
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300">
-                                <NavLink to="getall" className="border-transparent  rounded-lg  hover:text-black
+                                <NavLink to="get-entry" className="border-transparent  rounded-lg  hover:text-black
                                 block pl-3 active:scale-95 transition transform duration-100" >
                                     Get Journal Entries
                                 </NavLink>
@@ -123,19 +123,19 @@ function Dashboard() {
 
                             </li>
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
-                                <NavLink to="create" className="border-transparent  rounded-lg  hover:text-black
+                                <NavLink to="create-entry" className="border-transparent  rounded-lg  hover:text-black
                                 block pl-3 active:scale-95 transition transform duration-100" >
                                     Create New Entry
                                 </NavLink>
                             </li>
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
-                                <NavLink to="update" className="border-transparent  rounded-lg  hover:text-black
+                                <NavLink to="update-entry" className="border-transparent  rounded-lg  hover:text-black
                                 block pl-3 active:scale-95 transition transform duration-100" >
                                     Update existing
                                 </NavLink>
                             </li>
                             <li className="bg-amber-200 rounded-lg p-2 hover:bg-emerald-300 ">
-                                <NavLink to="delete" className="border-transparent  rounded-lg  hover:text-black
+                                <NavLink to="delete-entry" className="border-transparent  rounded-lg  hover:text-black
                                 block pl-3 active:scale-95 transition transform duration-100" >
                                     Delete Entry
                                 </NavLink>

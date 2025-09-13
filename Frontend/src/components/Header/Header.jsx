@@ -19,7 +19,7 @@ function Header() {
     };
 
     return (
-        <header className="bg-gray-400">
+        <header className="">
             <nav className="flex items-center justify-between px-6 py-4" >
 
                 {/* Left section */}
