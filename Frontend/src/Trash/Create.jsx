@@ -21,7 +21,7 @@ function Create() {
         headers.append("Content-Type", "application/json");
         headers.append("Authorization", `Bearer ${token}`);
 
-        const body = JSON.stringify({ title, content });
+        const body = JSON.stringify({ title, content });   // JS object -> JSON String
 
         try {
             const response = await fetch("http://localhost:8080/journal", {
@@ -56,7 +56,8 @@ function Create() {
                     <label className="block text-sm font-bold text-gray-800">Content</label>
                     <textarea name="content" placeholder="Describe your Day" className="mt-1 block w-full border border-emerald-800 rounded-md p-2" rows="5"></textarea>
                 </div>
-                <button onClick={handleSubmit} type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Entry</button>
+                <button onClick={handleSubmit} type="submit" className="bg-blue-500 
+                text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Entry</button>
             </form>
         </div>
     );
