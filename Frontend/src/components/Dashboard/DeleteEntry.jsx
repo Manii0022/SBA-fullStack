@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Search, Trash2, AlertTriangle, X, Hash, List } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { AlertTriangle, X, Hash, List } from 'lucide-react';
 
 const DeleteEntry = () => {
 
@@ -10,17 +10,22 @@ const DeleteEntry = () => {
   const handleDeleteById = async (e) => {
     e.preventDefault();
     setToShow(false);
-    formRef.current.reset();
+    console.log("form submitted");
+
     const formData = new FormData(formRef.current)
     const actualFormData = Object.fromEntries(formData.entries());
-    const id = actualFormData.id;
+    const formId = actualFormData.id;
+    console.log("formId is : ", formId);
+    console.log("form data : ", formData);
+
+
 
     const headers = new Headers();
     const token = localStorage.getItem("token");
     headers.append("content-type", "application/json")
     headers.append("Authorization", `Bearer ${token}`)
     try {
-      const response = await fetch("http://localhost:8080/journal/" + id, {
+      const response = await fetch("http://localhost:8080/journal/" + formId, {
         method: "DELETE",
         headers: headers
       })
@@ -35,8 +40,8 @@ const DeleteEntry = () => {
     } catch (err) {
       console.log("Network error while deleting : ", err);
     }
-   
 
+    formRef.current.reset();
     // setEntryId(id)
     // console.log("data / id : ", id)
   }
@@ -103,8 +108,8 @@ const DeleteEntry = () => {
                 name="id"
                 placeholder="Enter entry ID to delete..."
                 className=" ml-4 pl-10 pr-4 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required
               />
-
             </form>
 
             {/* view all entries  */}
@@ -156,7 +161,7 @@ const DeleteEntry = () => {
           <div className=' space-y-4 text-3xl text-slate-500 font-mono flex flex-col items-center 
           border-slate-400 p-4 rounded-xl bg-slate-100 hover:bg-slate-250'>
             <span className=' '>
-              Gone ones are always in the hearts. 
+              Gone ones are always in the hearts.
             </span>
             <span>
               Entry deleted successfully
@@ -168,9 +173,7 @@ const DeleteEntry = () => {
             </div>
           </div>
         ) : (
-          <div className='text-3xl text-slate-500 font-mono flex flex-col items-center 
-          border-slate-400 p-4 rounded-xl bg-slate-100 hover:bg-slate-250'>
-            OOPS ! ... Something went wrong, Entry not deleted. 
+          <div>
           </div>
         )}
 
