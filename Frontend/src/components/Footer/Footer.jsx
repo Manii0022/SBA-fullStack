@@ -1,94 +1,71 @@
-import React from "react";
-import { useState } from "react";
-function Footer() {
+import { Link } from 'react-router-dom';
+import { BookOpen, Menu, X } from 'lucide-react';
+function FooterN() {
 
-    const [openIndex, setOpenIndex] = useState(null);
-
-    const faqs = [
-        { q: "Question 1", a: "Answer for question 1 goes here." },
-        { q: "Question 2", a: "Answer for question 2 goes here." },
-        { q: "Question 3", a: "Answer for question 3 goes here." },
-        { q: "Question 4", a: "Answer for question 4 goes here." },
+    const navItems = [
+        { path: '/', label: 'Home' },
+        { path: '/about', label: 'About' },
+        { path: '/contact', label: 'Contact' },
     ];
 
-    const toggleFAQ = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
 
     return (
         <>
+            <footer className="bg-white border-t border-slate-200 mt-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div className="col-span-1 md:col-span-2">
+                            <div className="flex items-center space-x-3 mb-4">
+                                <div className="bg-blue-600 p-2 rounded-lg">
+                                    <BookOpen className="h-6 w-6 text-white" />
+                                </div>
+                                <span className="text-xl font-bold text-slate-800">Journal App</span>
+                            </div>
+                            <p className="text-slate-600 mb-4 max-w-md">
+                                Your personal space for reflection, growth, and capturing life's meaningful moments.
+                                Start your journaling journey today.
+                            </p>
+                        </div>
 
-            <footer className="mt-10 flex-col">
-                {/* <div>
-                    FAQs here
-                    <ul className="space-y-2">
-                        <li>Question 1</li>
-                        <li>Question 1</li>
-                        <li>Question 1</li>
-                        <li>Question 1</li>
-                    </ul>
+                        <div>
+                            <h3 className="font-semibold text-slate-800 mb-4">Quick Links</h3>
+                            <ul className="space-y-2">
+                                {navItems.map((item) => (
+                                    <li key={item.path}>
+                                        <Link to={item.path} className="text-slate-600 hover:text-blue-600 transition-colors">
+                                            {item.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                </div> */}
-                <div className="border-1 border-black ml-10 mr-10">
-                </div>
-                <h2 className="text-8xl font-bold mb-4 text-center">FAQs</h2>
-                <div className="border-1 border-black ml-10 mr-10"></div>
-
-                <ul className=" mt-10 space-y-2">
-                    {faqs.map((item, index) => (
-                        <li key={index} className="border rounded-lg">
-                            <button
-                                onClick={() => toggleFAQ(index)}
-                                className="w-full text-left p-3 font-semibold flex justify-between items-center"
-                            >
-                                {item.q}  
-                                <span>{openIndex === index ? "−" : "+"}</span>
-                            </button>
-                            {openIndex === index && (
-                                <p className="p-3 text-gray-600">{item.a}</p>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-
-                <div className="flex justify-around">
-                    <div>
-                        Resources
-                        <ol className="list-disc text-2xl">
-                            <li>lorem</li>
-                            <li>lorem</li>
-                            <li>lorem</li>
-                            <li>lorem</li>
-                        </ol>
-
+                        <div>
+                            <h3 className="font-semibold text-slate-800 mb-4">Get Started</h3>
+                            <ul className="space-y-2">
+                                <li>
+                                    <Link to="/signup" className="text-slate-600 hover:text-blue-600 transition-colors">
+                                        Create Account
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/login" className="text-slate-600 hover:text-blue-600 transition-colors">
+                                        Sign In
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div>
-                        Navigate
-                        <ol className="list-disc text-2xl">
-                            <li>lorem</li>
-                            <li>lorem</li>
-                            <li>lorem</li>
-                            <li>lorem</li>
-                        </ol>
+                    <div className="border-t border-slate-200 mt-8 pt-8 text-center">
+                        <p className="text-slate-500 text-sm">
+                            © 2025 Journal App. All rights reserved. Made with ❤️ for writers everywhere.
+                        </p>
                     </div>
-
-                    <div>
-                        Social
-                        <ol className=" list-disc list-inside text-2xl flex flex-col justify-center align-middle">
-                            <li>Mobile</li>
-                            <li>Github</li>
-                            <li>LinkedIn</li>
-                            <li>Instagram</li>
-                            <li>Email</li>
-                        </ol>
-                    </div>
-
                 </div>
             </footer>
-
         </>
     )
 }
 
-export default Footer;
+export default FooterN;
