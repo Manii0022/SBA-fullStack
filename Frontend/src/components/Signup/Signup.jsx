@@ -1,177 +1,404 @@
-import React, { useEffect, useRef, useState, } from "react";
-import { Link, Navigate, NavLink, useLocation, useNavigate } from "react-router-dom"
-import { useLayout } from "../../Context/LayoutContext";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, Lock, Eye, EyeOff, User, BookOpen, ArrowRight, Check, AlertCircle } from 'lucide-react';
 function Signup() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agreeToTerms: false,
+    subscribeNewsletter: true
+  });
 
-    const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [errors, setErrors] = useState({});
 
-    const { setShowHeader } = useLayout();
-    useEffect(() => {
-        setShowHeader(false);
-    }, []);
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
 
-    const formRef = useRef(null)
+    // Clear specific error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(formRef.current)  // this returns FormData object
-        const formDataObj = Object.fromEntries(formData.entries())   // this converts FormData object to JS object
-        const body = JSON.stringify(
-            {
-                userName: formDataObj.name,
-                email: formDataObj.email,
-                password: formDataObj.password
-            }
-        );
-        // const body = JSON.stringify(formDataObj);  // this converts JS object to JSON string..now this can be sent to backend using fetch or axios
-        // console.log(formDataObj);   // now we can access particular value using formDataObj.email or formDataObj.password
-        // console.log(body);
-        try {
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json")
-            const response = await fetch("http://localhost:8080/public/signup", {
-                method: "POST",
-                body: body,
-                headers: myHeaders
-            })
+    // Calculate password strength
+    if (name === 'password') {
+      calculatePasswordStrength(value);
+    }
+  };
 
-            if (response.ok) {
-                const data = response.json();
-                const token = data.token;
-                localStorage.setItem("token", token);    // save token to local storage
-                formRef.current.reset();   // reset form 
-                navigate("/dashboard");   // after everything, redirect to dashboard
+  const calculatePasswordStrength = (password) => {
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    setPasswordStrength(strength);
+  };
 
-                
-            } else {
-                const errorMsg = await response.text();
-                window.alert("Error ❌: " + errorMsg || response.status);
-            }
-        } catch (error) {
-            window.alert("Network error while signup ❌");
-            console.error(error);
-        }
+  const getPasswordStrengthText = () => {
+    switch (passwordStrength) {
+      case 0:
+      case 1: return { text: 'Weak', color: 'text-red-600' };
+      case 2: return { text: 'Fair', color: 'text-yellow-600' };
+      case 3: return { text: 'Good', color: 'text-blue-600' };
+      case 4:
+      case 5: return { text: 'Strong', color: 'text-green-600' };
+      default: return { text: '', color: '' };
+    }
+  };
 
-        // The JSON.stringify() method converts a JavaScript object to a JSON string.
-        // The JSON.parse() function is designed to do the opposite of JSON.stringify(). 
-        // It takes a JSON string as input and converts it into a JavaScript object.
-    };
+  const validateForm = () => {
+    const newErrors = {};
 
-    // backend jaha redirect krega(after success) niche ka code whi likha jayega
+    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+    if (!formData.agreeToTerms) {
+      newErrors.agreeToTerms = 'You must agree to the Terms of Service';
+    }
 
-    // const [user, setUser] = useState(null);
-    // const [token, setToken] = useState(null);
-    // const location = useLocation();
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    // useEffect(() => {
-    //     const query = new URLSearchParams(location.search);
-    //     const token = query.get("token");
-    //     setToken(token);
-    //     const email = query.get("email");
-    //     const name = query.get("name");
-    //     const exists = query.get("exists");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    //     if (token) {
-    //         localStorage.setItem("token", token);
-    //         setUser({ email, name, newUser: true });
-    //     } else if (exists) {
-    //         setUser({ email, name, newUser: false });
-    //     }
-    // }, [location.search]);
+    if (!validateForm()) return;
 
+    setIsLoading(true);
 
-    return (
-        <div className="font-serif h-screen">
-            <div className=" flex-col justify-center items-center content-center h-full w-full">
+    // Simulate API call
+    setTimeout(() => {
+      console.log('Signup attempt:', formData);
+      alert('Account created successfully! In a real app, you would be redirected to verify your email or to the dashboard.');
+      setIsLoading(false);
+    }, 2000);
+  };
 
-                <p className=" mb-10 text-center text-8xl text-black ">Signup</p>
+  const features = [
+    'Reduce stress',
+    'Boost focus',
+    'Track growth',
+    'Spark creativity',
+    'Improve emotional health',
+    'Build consistency',
+    'Private reflection',
+  ];
 
-                <div className="flex justify-center ">
-
-                    {/* left  */}
-
-                    <div className="flex-col justify-items-center items-center pr-4 ">
-
-                        <form ref={formRef} className=" pt-3" action="">
-
-                            <div className=" w-75 flex flex-col gap-3">
-                                <div className="flex flex-col ">
-                                    <p>
-                                        Name
-                                    </p>
-                                    <input className="border-2  border-gray-400 rounded-[5px] " type="text" name="name" placeholder="What should we call you !" />
-                                </div>
-                                <div className="flex flex-col ">
-                                    <p>
-                                        Email
-                                    </p>
-                                    <input className="border-2  border-gray-400 rounded-[5px] " type="email" name="email" placeholder="Enter your email" required />
-
-                                </div>
-                                <div className="flex flex-col ">
-                                    <p>
-                                        Password
-                                    </p>
-                                    <input className="border-2  border-gray-400  rounded-[5px] " type="password" name="password" placeholder="Enter password" required />
-                                </div>
-
-
-                                <div className="flex justify-center items-center">
-                                    <button onClick={handleFormSubmit} className="border-2 border-black rounded-lg px-6 py-2 bg-white 
-                            hover:bg-amber-300 active:scale-95 transition transform duration-100">
-                                        Continue
-                                    </button>
-                                </div>
-
-                                <div className="flex justify-center items-center gap-2">
-                                    <div>
-                                        Already have an account ?
-                                    </div>
-                                    <div className="text-black hover:text-orange-600 active:scale-95 transition transform duration-100">
-                                        <Link to="/login">Login</Link>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </form>
-                    </div>
-
-                    {/* middle */}
-                    <div className=" w-10 flex flex-col items-center pl-5 pr-5">
-                        <div className=" bg-black h-[45%] w-[2px] ">
-                        </div>
-                        <div className="  h-[10%] w-5">
-                            <span>or</span>
-
-                        </div>
-                        <div className=" bg-black h-[45%] w-[2px]">
-
-                        </div>
-                    </div>
-
-                    {/* signup  */}
-                    {/* right */}
-                    <div className="flex justify-center items-center pl-4 ">
-                        <div className="border-2 border-black rounded-lg px-3 py-1 flex hover:shadow-2xl
-                    active:scale-95  transform hover:bg-emerald-300 transition-all duration-300">
-                            <img
-                                className="h-10"
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
-                                alt=""
-                            />
-                            <button onClick={() => (window.location.href = "http://localhost:8080/oauth2/authorization/google")}>
-                                Signup with Google
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+  return (
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Left Side - Features */}
+          <div className="space-y-8">
+            <div>
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6">
+                <BookOpen className="h-8 w-8 text-blue-600" />
+              </div>
+              <h1 className="text-4xl font-bold text-slate-800 mb-4">
+                Start Your Journaling Journey Today
+              </h1>
+              <p className="text-xl text-slate-600 leading-relaxed">
+                Create your free account and begin capturing your story.
+              </p>
             </div>
 
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-slate-800">Why Start Journaling ?</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {features.map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                      <Check className="h-3 w-3 text-green-600" />
+                    </div>
+                    <span className="text-slate-600 text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Signup Form */}
+          <div>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-slate-800">Create Your Account</h2>
+                <p className="mt-2 text-slate-600">
+                  Get started with your free journaling account
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Fields */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-slate-700 mb-2">
+                      First Name
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <input
+                        id="firstName"
+                        name="firstName"
+                        type="text"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.firstName ? 'border-red-300' : 'border-slate-300'
+                          }`}
+                        placeholder="First name"
+                        required
+                      />
+                    </div>
+                    {errors.firstName && (
+                      <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-slate-700 mb-2">
+                      Last Name
+                    </label>
+                    <input
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.lastName ? 'border-red-300' : 'border-slate-300'
+                        }`}
+                      placeholder="Last name"
+                      required
+                    />
+                    {errors.lastName && (
+                      <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Email Field */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? 'border-red-300' : 'border-slate-300'
+                        }`}
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  )}
+                </div>
+
+                {/* Password Field */}
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input
+                      id="password"
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.password ? 'border-red-300' : 'border-slate-300'
+                        }`}
+                      placeholder="Create a password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {formData.password && (
+                    <div className="mt-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex-1 bg-slate-200 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full transition-all ${passwordStrength <= 1 ? 'bg-red-500' :
+                              passwordStrength <= 2 ? 'bg-yellow-500' :
+                                passwordStrength <= 3 ? 'bg-blue-500' : 'bg-green-500'
+                              }`}
+                            style={{ width: `${(passwordStrength / 5) * 100}%` }}
+                          />
+                        </div>
+                        <span className={`text-xs font-medium ${getPasswordStrengthText().color}`}>
+                          {getPasswordStrengthText().text}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {errors.password && (
+                    <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                  )}
+                </div>
+
+                {/* Confirm Password Field */}
+                <div>
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 mb-2">
+                    Confirm Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                      className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.confirmPassword ? 'border-red-300' : 'border-slate-300'
+                        }`}
+                      placeholder="Confirm your password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {errors.confirmPassword && (
+                    <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                  )}
+                </div>
+
+                {/* Checkboxes */}
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <input
+                      id="agreeToTerms"
+                      name="agreeToTerms"
+                      type="checkbox"
+                      checked={formData.agreeToTerms}
+                      onChange={handleInputChange}
+                      className={`h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded mt-0.5 ${errors.agreeToTerms ? 'border-red-300' : ''
+                        }`}
+                      required
+                    />
+                    <label htmlFor="agreeToTerms" className="ml-3 block text-sm text-slate-700">
+                      I agree to the{' '}
+                      <Link to="#" className="text-blue-600 hover:text-blue-500">
+                        Terms of Service
+                      </Link>{' '}
+                      and{' '}
+                      <Link to="#" className="text-blue-600 hover:text-blue-500">
+                        Privacy Policy
+                      </Link>
+                    </label>
+                  </div>
+                  {errors.agreeToTerms && (
+                    <p className="text-sm text-red-600 ml-7">{errors.agreeToTerms}</p>
+                  )}
+
+                  <div className="flex items-start">
+                    <input
+                      id="subscribeNewsletter"
+                      name="subscribeNewsletter"
+                      type="checkbox"
+                      checked={formData.subscribeNewsletter}
+                      onChange={handleInputChange}
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded mt-0.5"
+                    />
+                    <label htmlFor="subscribeNewsletter" className="ml-3 block text-sm text-slate-700">
+                      Send me tips and updates about journaling (optional)
+                    </label>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full inline-flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      <span>Creating account...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Create Account</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-300" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-2 bg-white text-slate-500">Or Signup with</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-center items-center pl-4 mt-5 ">
+                <div className="border-2 border-slate-300 rounded-lg px-3 py-1 flex hover:shadow-2xl
+                    active:scale-95  transform transition-all duration-300">
+                  <img
+                    className="h-6"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGq_iOx_JxKOsJJbZxkZTngb9wXF1CWPmAOA&s"
+                    alt=""
+                  />
+                  <button className="ml-3 font-serif text-slate-500
+                active:scale-95 transition transform duration-150"
+                    onClick={() => (window.location.href = "http://localhost:8080/oauth2/authorization/google")}>
+                    Google
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Sign In Link */}
+            <div className="mt-6 text-center">
+              <p className="text-slate-600">
+                Already have an account?{' '}
+                <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-    )
-}
+
+      </div>
+    </div>
+  );
+};
 
 export default Signup;

@@ -1,91 +1,113 @@
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from 'react-router-dom';
+import { BookOpen, Menu, X } from 'lucide-react';
+import { useState } from "react";
+function HeaderN() {
 
-function Header() {
+    const location = useLocation();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+    const navItems = [
+        { path: '/', label: 'Home' },
+        { path: '/about', label: 'About' },
+        { path: '/contact', label: 'Contact' },
+    ];
 
-    const navigate = useNavigate();
-
-    const handleScrollToFooter = () => {
-        // keep user on current route
-        navigate(window.location.pathname, { replace: true });
-
-        // scroll smoothly to footer
-        setTimeout(() => {
-            document.getElementById("footer")?.scrollIntoView({
-                behavior: "smooth",
-            });
-        }, 100);
-    };
+    const authItems = [
+        { path: '/login', label: 'Login', type: 'secondary' },
+        { path: '/signup', label: 'Sign Up', type: 'primary' },
+    ];
 
     return (
-        <header className="">
-            <nav className="flex items-center justify-between px-6 py-4" >
+        <>
+            <header className="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        {/* Logo */}
+                        <NavLink to="/" className="flex items-center space-x-3">
+                            <div className="bg-blue-600 p-2 rounded-lg">
+                                <BookOpen className="h-6 w-6 text-white" />
+                            </div>
+                            <span className="text-xl font-bold text-slate-800">Journal App</span>
+                        </NavLink>
 
-                {/* Left section */}
-                <div className="flex gap-10 items-center">
-                    <div className=" h-full text-5xl 
-                     font-serif">
-                        <div>
-                            <img className="size-[100px]" src="https://www.svgrepo.com/show/494022/travel.svg" alt="logo" />
+                        {/* Desktop Navigation */}
+                        <nav className="hidden md:flex items-center space-x-8">
+                            {navItems.map((item) => (
+                                <NavLink
+                                    key={item.path}
+                                    to={item.path}
+                                    className={({ isActive }) => `text-sm font-medium transition-colors 
+                                        ${isActive ? "text-blue-600" : "text-slate-600 hover:text-slate-900"}`}
+                                >
+                                    {item.label}
+                                </NavLink>
+                            ))}
+                        </nav>
+
+                        {/* Desktop Auth Buttons */}
+                        <div className="hidden md:flex items-center space-x-4">
+                            {authItems.map((item) => (
+                                <NavLink
+                                    key={item.path}
+                                    to={item.path}
+                                    className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${item.type === 'primary'
+                                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                        : ''
+                                        } ${isActive ? "text-blue-600" : "text-slate-600 "}`}
+                                >
+                                    {item.label}
+                                </NavLink>
+                            ))}
                         </div>
 
-                        <div className="text-xl ">
-                            Journal App
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                        >
+                            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {isMobileMenuOpen && (
+                        <div className="md:hidden border-t border-slate-200 py-4">
+                            <div className="space-y-2">
+                                {navItems.map((item) => (
+                                    <NavLink
+                                        key={item.path}
+                                        to={item.path}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${location.pathname === item.path
+                                            ? 'bg-blue-100 text-blue-700'
+                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                                            }`}
+                                    >
+                                        {item.label}
+                                    </NavLink>
+                                ))}
+                                <div className="pt-2 border-t border-slate-200 mt-4">
+                                    {authItems.map((item) => (
+                                        <NavLink
+                                            key={item.path}
+                                            to={item.path}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors mb-2 ${item.type === 'primary'
+                                                ? 'bg-blue-600 hover:bg-blue-700 text-white text-center'
+                                                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                                                }`}
+                                        >
+                                            {item.label}
+                                        </NavLink>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-
-                    </div>
-
-                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg 
-                            hover:text-black">
-                        <NavLink
-                            to={""}
-                           className={({ isActive }) =>
-                                `block py-2 pr-4 pl-3 duration-200  
-                                        ${isActive ? "text-orange-700" : "text-gray-700"}
-                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
-                            }
-                        >
-                            Home
-                        </NavLink>
-                    </div>
-
-                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg 
-                            hover:text-black">
-                        <NavLink
-                            to={"connect"}
-                            className={({ isActive }) =>
-                                `block py-2 pr-4 pl-3 duration-200  
-                                        ${isActive ? "text-orange-700" : "text-gray-700"}
-                                        hover:text-orange-700 active:scale-95 transition transform duration-100`
-                            }
-                        >
-                            Connect
-                        </NavLink>
-                    </div>
-
-                    <div className="text-5xl font-serif border-transparent px-6 py-2 rounded-lg 
-                            hover:text-black">
-                        <NavLink
-                            to={"contact"}
-                            className={({ isActive }) =>
-                                `block py-2 pr-4 pl-3 duration-200  
-                                        ${isActive ? "text-orange-700" : "text-gray-700"}
-                                         hover:text-orange-700 active:scale-95 transition transform duration-100`
-                            }
-                        >
-                            Contact us
-                        </NavLink>
-                    </div>
-
-
-
+                    )}
                 </div>
-
-
-            </nav>
-        </header>
-    );
+            </header>
+        </>
+    )
 }
 
-export default Header;
+export default HeaderN;
