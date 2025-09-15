@@ -41,7 +41,7 @@ function Delete() {
 
     return (
         <div className="p-4">
-            <form ref={formRef} className="space-y-4">
+            <form a ref={formRef} className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-800">Entry ID</label>
                     <input type="text" name="id" className="mt-1 block w-full border border-black rounded-md p-2" placeholder="Enter ID to delete " required />
