@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, User, BookOpen, ArrowRight, Check, AlertCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 function Signup() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
     agreeToTerms: false,
     subscribeNewsletter: true
   });
-
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -24,11 +23,6 @@ function Signup() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-
-    // Clear specific error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
 
     // Calculate password strength
     if (name === 'password') {
@@ -58,37 +52,53 @@ function Signup() {
     }
   };
 
-  const validateForm = () => {
-    const newErrors = {};
 
-    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-    if (!formData.agreeToTerms) {
-      newErrors.agreeToTerms = 'You must agree to the Terms of Service';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
+  const formRef = useRef(null);
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) return;
-
     setIsLoading(true);
+    console.log(formData);
+    const body = JSON.stringify({
+      userName: formData.fullName,
+      password: formData.password,
+      email: formData.email
+    })
+    try {
+      console.log("inside try ");
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Signup attempt:', formData);
-      alert('Account created successfully! In a real app, you would be redirected to verify your email or to the dashboard.');
-      setIsLoading(false);
-    }, 2000);
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json")
+      const response = await fetch("http://localhost:8080/public/signup", {
+        method: "POST",
+        body: body,
+        headers: myHeaders
+      })
+      console.log(response);
+
+      if (response.ok) {
+        const data = await response.text();   // bcoz jwt is not json, it is plain text string
+        console.log("data from fetch : ", data);
+        localStorage.setItem("token", data);    // save token to local storage
+        navigate("/dashboard");   // after everything, redirect to dashboard
+      } else {
+        const errorMsg = await response.text();
+        console.error("Error : " + errorMsg || response.status);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false)
+      // formRef.current.reset();   // reset form 
+      setFormData({
+        fullName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        agreeToTerms: false,
+        subscribeNewsletter: true
+      })
+    }
+
   };
 
   const features = [
@@ -144,50 +154,27 @@ function Signup() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {/* FORM BEGINS  */}
+              <form ref={formRef} onSubmit={handleFormSubmit} className="space-y-6">
                 {/* Name Fields */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className=" gap-4">
                   <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-slate-700 mb-2">
-                      First Name
+                    <label htmlFor="fullName" className="block text-sm font-medium text-slate-700 mb-2">
+                      Full Name
                     </label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                       <input
-                        id="firstName"
-                        name="firstName"
+                        id="fullName"
+                        name="fullName"
                         type="text"
-                        value={formData.firstName}
+                        value={formData.fullName}
                         onChange={handleInputChange}
-                        className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.firstName ? 'border-red-300' : 'border-slate-300'
-                          }`}
-                        placeholder="First name"
+                        className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent `}
+                        placeholder="Enter Full Name "
                         required
                       />
                     </div>
-                    {errors.firstName && (
-                      <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-slate-700 mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      id="lastName"
-                      name="lastName"
-                      type="text"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.lastName ? 'border-red-300' : 'border-slate-300'
-                        }`}
-                      placeholder="Last name"
-                      required
-                    />
-                    {errors.lastName && (
-                      <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
-                    )}
                   </div>
                 </div>
 
@@ -204,15 +191,11 @@ function Signup() {
                       type="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? 'border-red-300' : 'border-slate-300'
-                        }`}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent `}
                       placeholder="Enter your email"
                       required
                     />
                   </div>
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-                  )}
                 </div>
 
                 {/* Password Field */}
@@ -228,8 +211,7 @@ function Signup() {
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={handleInputChange}
-                      className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.password ? 'border-red-300' : 'border-slate-300'
-                        }`}
+                      className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent `}
                       placeholder="Create a password"
                       required
                     />
@@ -241,6 +223,7 @@ function Signup() {
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
+                  {/* password strength */}
                   {formData.password && (
                     <div className="mt-2">
                       <div className="flex items-center space-x-2">
@@ -259,9 +242,7 @@ function Signup() {
                       </div>
                     </div>
                   )}
-                  {errors.password && (
-                    <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-                  )}
+
                 </div>
 
                 {/* Confirm Password Field */}
@@ -277,8 +258,7 @@ function Signup() {
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.confirmPassword ? 'border-red-300' : 'border-slate-300'
-                        }`}
+                      className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent `}
                       placeholder="Confirm your password"
                       required
                     />
@@ -290,9 +270,10 @@ function Signup() {
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
-                  {errors.confirmPassword && (
-                    <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                  {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                    <p className="mt-1 text-sm text-red-600">Passwords do not match</p>
                   )}
+
                 </div>
 
                 {/* Checkboxes */}
@@ -304,8 +285,7 @@ function Signup() {
                       type="checkbox"
                       checked={formData.agreeToTerms}
                       onChange={handleInputChange}
-                      className={`h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded mt-0.5 ${errors.agreeToTerms ? 'border-red-300' : ''
-                        }`}
+                      className={`h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded mt-0.5`}
                       required
                     />
                     <label htmlFor="agreeToTerms" className="ml-3 block text-sm text-slate-700">
@@ -319,9 +299,7 @@ function Signup() {
                       </Link>
                     </label>
                   </div>
-                  {errors.agreeToTerms && (
-                    <p className="text-sm text-red-600 ml-7">{errors.agreeToTerms}</p>
-                  )}
+
 
                   <div className="flex items-start">
                     <input
