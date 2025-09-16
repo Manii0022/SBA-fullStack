@@ -1,8 +1,22 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Plus, Search, Edit, Trash2, Calendar, BookOpen, TrendingUp } from 'lucide-react';
 
 const Dashboard = () => {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  // const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get("token");
+    if (token) {
+      localStorage.setItem("token", token);
+      console.log("local token after google : ", token);
+      navigate("/dashboard")
+    }
+  }, [location,navigate]);
 
   const utilityCards = [
     {
