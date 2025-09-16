@@ -18,14 +18,11 @@ function Login() {
   const handleFormSubmit = async (e) => {
     setIsLoading(true);
     e.preventDefault();
-    const formData = new FormData(formRef.current)
-    const formDataObj = Object.fromEntries(formData.entries())
-    console.log(formDataObj);
-
+    console.log(formData);
     const body = JSON.stringify(
       {
-        userName: formDataObj.username,
-        password: formDataObj.password
+        userName: formData.username,
+        password: formData.password
       }
     )
     const myHeaders = new Headers();
@@ -42,7 +39,12 @@ function Login() {
         const token = data;
         console.log(data);
         localStorage.setItem("token", token);
-        formRef.current.reset();
+        // formRef.current.reset();
+        setFormData({
+          username: '',
+          password: '',
+          rememberMe: false
+        })
         setIsLoading(false);
         navigate("/dashboard");
       }
