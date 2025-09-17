@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Heart, Shield, Users, Target, Lightbulb, Award, Globe, Zap } from 'lucide-react';
+import { BookOpen, Heart, Shield, Users, Target, Lightbulb, Award, Globe, Zap, Smile, Brain } from 'lucide-react';
 
 const About = () => {
   const values = [
@@ -35,39 +35,42 @@ const About = () => {
 
   const team = [
     {
-      name: 'Alex Rivera',
+      name: 'Manish',
       role: 'Founder & CEO',
-      bio: 'Passionate writer and tech entrepreneur with 10+ years in digital product development.',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop'
+      bio: 'Passionate individual with a commitment to continuous learning and delivering high quality results.',
+      image: './Images/image5.jpg'
     },
     {
-      name: 'Sarah Kim',
-      role: 'Head of Design',
-      bio: 'UX designer focused on creating beautiful, intuitive experiences for writers.',
-      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop'
+      name: 'Manish',
+      role: 'Frontend developer',
+      bio: 'Creative and intuitive frontend developer using technologies like, HTML, CSS , Tailwind CSS, JavaScript, React.js',
+      image: './Images/image5.jpg'
     },
     {
-      name: 'Marcus Johnson',
-      role: 'Lead Developer',
-      bio: 'Full-stack engineer passionate about building secure, scalable applications.',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop'
+      name: 'Manish',
+      role: 'Backend Developer',
+      bio: 'Java and backend developer, using tech like Spring Boot, Spring security, REST APIs and more.',
+      image: './Images/image5.jpg'
     }
   ];
 
   const milestones = [
-    { year: '2020', event: 'Company Founded', description: 'Started with a simple idea to digitize journaling' },
-    { year: '2021', event: 'First 1,000 Users', description: 'Reached our first major user milestone' },
-    { year: '2022', event: 'Mobile App Launch', description: 'Expanded to iOS and Android platforms' },
-    { year: '2023', event: '50,000 Users', description: 'Growing community of passionate writers' },
-    { year: '2024', event: 'AI Features', description: 'Introduced smart insights and writing prompts' },
-    { year: '2025', event: 'Global Expansion', description: 'Now serving users in over 50 countries' }
+    { year: '2024', event: 'Abstract idea', description: 'Found an idea of creating a journal App for public.' },
+    { year: '2024', event: 'Roadmap and planning', description: 'Planned and designed the entire system.' },
+    { year: '2025', event: 'Backend and logic', description: 'Worked on the backend logic. Setting up the database, modelling the entities.' },
+    { year: '2025', event: 'UI/UX', description: 'Designed and built the frontend of the application' },
+    { year: '2025', event: 'Integration', description: 'Inegrated the backend and frontend together to produce a full fledged working application.' },
+    { year: '2025', event: 'Hosting', description: 'Finally hosted the app for the public use.' }
   ];
 
   const features = [
     { icon: Target, label: 'Empower Self-Reflection' },
     { icon: Shield, label: 'Protect Privacy' },
     { icon: Heart, label: 'Foster Growth' },
-    { icon: Globe, label: 'Connect Communities' }
+    { icon: Globe, label: 'Connect Communities' },
+    { icon: Smile, label: "Improved mood" },
+    { icon: Brain, label: "Better memory" },
+    { icon: Award, label: "Self awareness" },
   ];
 
   return (
@@ -79,7 +82,7 @@ const About = () => {
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-slate-800">About Our Story</h1>
         <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          We're on a mission to help people capture, reflect on, and learn from their life experiences 
+          We're on a mission to help people capture, reflect on, and learn from their life experiences
           through the power of digital journaling.
         </p>
       </section>
@@ -90,13 +93,17 @@ const About = () => {
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-slate-800">Our Mission</h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-              We believe that everyone has valuable thoughts, experiences, and insights worth preserving. 
-              Our platform provides a safe, beautiful, and intuitive space for people to document their 
+              We believe that everyone has valuable thoughts, experiences, and insights worth preserving.
+              Our platform provides a safe, beautiful, and intuitive space for people to document their
               journey, reflect on their growth, and connect with their authentic selves.
             </p>
             <p className="text-lg text-slate-600 leading-relaxed">
-              In a world full of distractions, we're creating a sanctuary for mindful reflection and 
+              In a world full of distractions, we're creating a sanctuary for mindful reflection and
               personal growth through the timeless practice of journaling, enhanced by modern technology.
+            </p>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              Our mission is to develop the habit of journaling in people, resulting in significnt mental and
+              physical benefits, including stress reduction, improved mood, enhanced self-awareness, and better memory.
             </p>
           </div>
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8">
@@ -206,7 +213,7 @@ const About = () => {
             The impact we've made together with our amazing community.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <div className="text-3xl font-bold mb-2">50K+</div>
@@ -221,7 +228,7 @@ const About = () => {
             <div className="text-blue-100 text-sm">Countries</div>
           </div>
           <div>
-            <div className="text-3xl font-bold mb-2">99.9%</div>
+            <div className="text-3xl font-bold mb-2">99%</div>
             <div className="text-blue-100 text-sm">Uptime</div>
           </div>
         </div>
