@@ -11,15 +11,11 @@ const DeleteEntry = () => {
     e.preventDefault();
     setToShow(false);
     console.log("form submitted");
-
     const formData = new FormData(formRef.current)
     const actualFormData = Object.fromEntries(formData.entries());
     const formId = actualFormData.id;
     console.log("formId is : ", formId);
     console.log("form data : ", formData);
-
-
-
     const headers = new Headers();
     const token = localStorage.getItem("token");
     headers.append("content-type", "application/json")
@@ -40,7 +36,6 @@ const DeleteEntry = () => {
     } catch (err) {
       console.log("Network error while deleting : ", err);
     }
-
     formRef.current.reset();
     // setEntryId(id)
     // console.log("data / id : ", id)
@@ -49,7 +44,7 @@ const DeleteEntry = () => {
   const [allData, setAllData] = useState(null);
   const [toShow, setToShow] = useState(false)
   // without async-await
-  const handleAllSubmit = () => {
+  const handleViewAllEntries = () => {
     setToShow(true);
     const headers = new Headers();
     const token = localStorage.getItem("token");
@@ -68,7 +63,6 @@ const DeleteEntry = () => {
       })
         .then(data => {
           setAllData(data)
-
           console.log(data);
           return data;
         })
@@ -84,7 +78,7 @@ const DeleteEntry = () => {
         <h1 className="text-3xl font-bold text-slate-800 mb-2">Delete Entry</h1>
         <p className="text-slate-600 mb-8">Select entries to remove from your journal</p>
 
-        {/* Search by id*/}
+        {/* Search by id and all */}
         <div className="mb-4">
           <div className="flex flex-col gap-2">
             <form action="" onSubmit={handleDeleteById} ref={formRef}>
@@ -116,7 +110,7 @@ const DeleteEntry = () => {
             <button
               onClick={() => {
                 setDeleteMode('all');
-                handleAllSubmit();
+                handleViewAllEntries();
               }}
               className={`w-50 flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
                                           active:scale-95 transform duration-100 ${deleteMode === 'all'
@@ -129,8 +123,6 @@ const DeleteEntry = () => {
             </button>
           </div>
         </div>
-
-
 
         {deleteMode === 'all' && (
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
@@ -156,71 +148,75 @@ const DeleteEntry = () => {
 
       {/* Entry List */}
       <div className="space-y-3">
-
-        {deleteMode === 'id' && deletedById ? (
-          <div className=' space-y-4 text-3xl text-slate-500 font-mono flex flex-col items-center 
-          border-slate-400 p-4 rounded-xl bg-slate-100 hover:bg-slate-250'>
-            <span className=' '>
-              Gone ones are always in the hearts.
-            </span>
-            <span>
-              Entry deleted successfully
-            </span>
+        {deleteMode == 'all' ?
+          (
             <div>
-              <span>
-
-              </span>
-            </div>
-          </div>
-        ) : (
-          <div>
-          </div>
-        )}
-
-
-
-        <div className="space-y-3">
-          {toShow ? (
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-800">
-                {allData
-                  ? `Entries Found - ${allData.length}`
-                  : ``
-                }
-              </h2>
-            </div>
-          ) : (
-            <div></div>
-          )}
-          <div className='space-y-4'>
-            {allData && toShow ? (
-              allData.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).map((entry) => (
-                <div key={entry.id} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <span className="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-1 rounded">
-                          ID: {entry.id}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-semibold text-slate-800 mb-2">{entry.title}</h3>
-                      <p className="text-slate-600 mb-3">{entry.content}</p>
-                    </div>
-                    <div className="flex flex-col items-center space-x-4 text-sm text-slate-500">
-                      <span>{new Date(entry.date).toLocaleDateString()}</span>
-                      {entry.mood ? (
-                        <span className='mt-2 py-1  px-4 border border-slate-300 rounded-lg bg-slate-100'>{entry.mood}</span>) :
-                        <span></span>
-                      }
-                    </div>
-
+              <div className="space-y-4">
+                {allData != null && allData.length > 0 ? (
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-semibold text-slate-800">
+                      Entries Found - {allData.length}
+                    </h2>
+                  </div>) : (
+                  <div>
+                    <h2 className="text-xl font-semibold text-slate-800">
+                      No Entries yet
+                    </h2>
                   </div>
+                )}
+                <div className='space-y-4'>
+                  {allData != null && allData.length>0 ?
+                    (allData.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).map((entry) => (
+                      <div key={entry.id} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-2">
+                              <span className="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-1 rounded">
+                                ID: {entry.id}
+                              </span>
+                            </div>
+                            <h3 className="text-lg font-semibold text-slate-800 mb-2">{entry.title}</h3>
+                            <p className="text-slate-600 mb-3">{entry.content}</p>
+                          </div>
+                          <div className="flex flex-col items-center space-x-4 text-sm text-slate-500">
+                            <span>{new Date(entry.date).toLocaleDateString()}</span>
+                            {entry.mood ? (
+                              <span className='mt-2 py-1  px-4 border border-slate-300 rounded-lg bg-slate-100'>{entry.mood}</span>) :
+                              <span></span>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    ))) : (
+                      <div></div>
+                    )}
                 </div>
-              ))) : (
-              <div></div>
-            )}
-          </div>
-        </div>
+              </div>
+            </div>
+          ) :
+          (
+            <div>
+              {deleteMode == 'id' && deletedById ? (
+                <div className=' space-y-4 text-3xl text-slate-500 font-mono flex flex-col items-center
+                 border-slate-400 p-4 rounded-xl bg-slate-100 hover:bg-slate-250'>
+                  <span className=' '>
+                    Gone ones are always in the hearts.
+                  </span>
+                  <span>
+                    Entry deleted successfully
+                  </span>
+                </div>
+              ) : (
+                <div>
+                </div>
+              )}
+            </div>
+          )}
+
+
+
+        {/* Entry List */}
+
 
       </div>
     </div>
