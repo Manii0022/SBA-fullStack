@@ -42,7 +42,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'support@journalapp.com',
+      details: 'manishlodhi0224@gmail.com',
       description: 'Send us an email anytime',
       color: 'text-blue-600',
       bgColor: 'bg-blue-50'
@@ -50,7 +50,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+1 (555) 123-4567',
+      details: '+91 8178053840',
       description: 'Mon-Fri from 8am to 6pm',
       color: 'text-green-600',
       bgColor: 'bg-green-50'
@@ -58,8 +58,8 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: '123 Innovation Drive',
-      description: 'San Francisco, CA 94105',
+      details: '123 Developers Plaza',
+      description: 'India, 201014',
       color: 'text-purple-600',
       bgColor: 'bg-purple-50'
     }
@@ -68,7 +68,15 @@ const Contact = () => {
   const faqItems = [
     {
       question: 'How secure is my journal data?',
-      answer: 'We use end-to-end encryption and industry-standard security measures to protect your journal entries. Your data is never shared with third parties and remains completely private.'
+      answer: 'We believe in privacy and use industry-standard security measures to protect your journal entries. Your data is never shared with third parties and remains completely private.'
+    },
+    {
+      question: 'Can I share my journal entries with others?',
+      answer: 'Your journal is completely private by default. However, you can choose to export specific entries and share them manually if you wish. We never automatically share your content.'
+    },
+    {
+      question: 'How much does the journal app cost?',
+      answer: 'Journaling is something that everyone should and must do. Keeping that in mind, our App is completely free to use for all.'
     },
     {
       question: 'Can I export my journal entries?',
@@ -81,14 +89,6 @@ const Contact = () => {
     {
       question: 'What happens if I forget my password?',
       answer: 'You can reset your password using the "Forgot Password" link on the login page. We\'ll send you a secure reset link via email to regain access to your journal.'
-    },
-    {
-      question: 'Can I share my journal entries with others?',
-      answer: 'Your journal is completely private by default. However, you can choose to export specific entries and share them manually if you wish. We never automatically share your content.'
-    },
-    {
-      question: 'How much does the journal app cost?',
-      answer: 'We offer a free tier with basic features, and premium plans with advanced features like unlimited entries, advanced search, and mood analytics. Check our pricing page for details.'
     }
   ];
 
