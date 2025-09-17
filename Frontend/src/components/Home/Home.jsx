@@ -36,25 +36,25 @@ const HomeN = () => {
 
   const testimonials = [
     {
-      name: 'Sarah Johnson',
+      name: 'lorem ipsum',
       role: 'Writer & Blogger',
       content: 'This journal app has transformed how I capture and reflect on my daily experiences. The interface is beautiful and intuitive.',
       rating: 5,
-      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop'
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiTJEHmurFnq6xy675irjExaw76509oK1_DjT2kGmnW1x3oZRXEzQJyLRzKfGI4XALsiU&usqp=CAU'
     },
     {
-      name: 'Michael Chen',
+      name: 'lorem ipsum',
       role: 'Student',
       content: 'Perfect for tracking my thoughts and goals. The search functionality makes it easy to find old entries and see my growth.',
       rating: 5,
-      avatar: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop'
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBNPTY7m-4nOzKjX6eY-soNqNuIh29VP9Dkg&s'
     },
     {
-      name: 'Emma Davis',
+      name: 'lorem ipsum',
       role: 'Professional',
       content: 'I love how secure and private this platform is. Finally, a place where I can write freely without worrying about privacy.',
       rating: 5,
-      avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop'
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSngE6QEa8lAAW_j-RbEpizZs_-VBmFbdyRlOMNnWH9L033xP5BN_vvxu-2oCbZj2k7Dks&usqp=CAU'
     }
   ];
 
@@ -62,7 +62,7 @@ const HomeN = () => {
     { number: '50K+', label: 'Active Writers' },
     { number: '2M+', label: 'Journal Entries' },
     { number: '50+', label: 'Countries' },
-    { number: '99.9%', label: 'Uptime' }
+    { number: '99%', label: 'Uptime' }
   ];
 
   return (
@@ -193,7 +193,7 @@ const HomeN = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Getting started Section */}
       <section className="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center">
         <h2 className="text-3xl font-bold text-slate-800 mb-4">Ready to Start Your Journey?</h2>
         <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
