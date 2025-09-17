@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { BookOpen, Menu, X } from 'lucide-react';
 import { useState } from "react";
-function HeaderN() {
+function Header() {
 
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,6 +10,7 @@ function HeaderN() {
         { path: '/', label: 'Home' },
         { path: '/about', label: 'About' },
         { path: '/contact', label: 'Contact' },
+        { path: '/dashboard', label: 'Dashboard' }
     ];
 
     const authItems = [
@@ -110,4 +111,4 @@ function HeaderN() {
     )
 }
 
-export default HeaderN;
+export default Header;
