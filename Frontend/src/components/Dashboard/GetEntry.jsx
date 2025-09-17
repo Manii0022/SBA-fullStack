@@ -131,17 +131,21 @@ const GetEntry = () => {
                     (
                         /* Find all */
                         <div className="space-y-4">
-                            <div className="flex items-center justify-between">
-                                <h2 className="text-xl font-semibold text-slate-800">
-                                    {allData
-                                        ? `Entries Found - ${allData.length}`
-                                        : `Fetching data ...`
-                                    }
-                                </h2>
-                            </div>
+                            {allData != null && allData.length > 0 ? (
+                                <div className="flex items-center justify-between">
+                                    <h2 className="text-xl font-semibold text-slate-800">
+                                        Entries Found - {allData.length}
+                                    </h2>
+                                </div>) : (
+                                <div>
+                                    <h2 className="text-xl font-semibold text-slate-800">
+                                        Fetching data ...
+                                    </h2>
+                                </div>
+                            )}
                             <div className='space-y-4'>
-                                {allData ? (
-                                    allData.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).map((entry) => (
+                                {allData != null && allData.length>0 ?
+                                    (allData.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).map((entry) => (
                                         <div key={entry.id} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
                                             <div className="flex items-start justify-between mb-4">
                                                 <div className="flex-1">
@@ -160,21 +164,19 @@ const GetEntry = () => {
                                                         <span></span>
                                                     }
                                                 </div>
-
                                             </div>
                                         </div>
                                     ))) : (
-                                    <div></div>
-                                )}
+                                        <div className='text-3xl font-mono text-slate-700'>No Entries yet</div>
+                                    )}
                             </div>
                         </div>
                     ) : (
                         <div className='space-y-4'>
                             <div className="relative col-span-2">
-
                             </div>
                             <div className='space-y-4'>
-                                {idData ? (
+                                {idData!=null ? (
                                     <div key={idData.id} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
                                         <div className="flex items-start justify-between mb-4">
                                             <div className="flex-1">
@@ -190,17 +192,13 @@ const GetEntry = () => {
                                                 <span>{new Date(idData.date).toLocaleDateString()}</span>
                                             </div>
                                         </div>
-
                                     </div>
                                 ) : (
-                                    <div>No data</div>
+                                    <div className='text-2xl font-mono text-slate-700'>Enter id and Search</div>
                                 )}
                             </div>
                         </div>
                     )}
-
-
-
             </div>
         </div>
 
